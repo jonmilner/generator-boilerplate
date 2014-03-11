@@ -27,7 +27,8 @@ var DefaultGenerator = yeoman.generators.Base.extend({
       },
       {
         name: 'projectVersion',
-        message: 'Version:'
+        message: 'Version:',
+        default: '0.0.1'
       }
     ];
 
