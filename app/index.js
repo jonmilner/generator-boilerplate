@@ -33,7 +33,7 @@ var DefaultGenerator = yeoman.generators.Base.extend({
       {
         type: 'confirm',
         name: 'optionWebfont',
-        message: 'Use grunt-webfont for custom font icons?',
+        message: 'Use grunt-webfont for custom font icons? (Requires FontForge)',
         default: true
       },
     ];
@@ -49,33 +49,41 @@ var DefaultGenerator = yeoman.generators.Base.extend({
 
   app: function () {
 
-    this.template('_Gruntfile.js', 'Gruntfile.js');
+    this.template('_Gruntfile.coffee', 'Gruntfile.coffee');
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
     this.copy('.bowerrc', '.bowerrc');
     this.copy('.gitignore', '.gitignore');
 
     // Front-End
+    this.mkdir('app');
+    this.mkdir('app/components');
+    this.template('app/index.html', 'app/index.html');
+
+      // Assets
+      this.mkdir('app/assets');
+
+        // CSS
+        this.mkdir('app/assets/css');
+        this.template('app/assets/css/styles.scss', 'app/assets/css/styles.scss');
+
+        // Fonts
+        this.mkdir('app/assets/fonts');
+        this.mkdir('app/assets/fonts/svg');
+        this.template('app/assets/fonts/svg/arrow.svg', 'app/assets/fonts/svg/arrow.svg');
+
+        // JS
+        this.mkdir('app/assets/js');
+        this.template('app/assets/js/custom.js', 'app/assets/js/custom.js');
+
+    // Build
     this.mkdir('public');
-    this.template('public/index.html', 'public/index.html');
 
       // Assets
       this.mkdir('public/assets');
 
-        // CSS
-        this.mkdir('public/assets/css');
-        this.template('public/assets/css/styles.scss', 'public/assets/css/styles.scss');
-
         // Images
         this.mkdir('public/assets/img');
-
-        // Fonts
-        this.mkdir('public/assets/fonts');
-        this.mkdir('public/assets/fonts/svg');
-        this.template('public/assets/fonts/svg/arrow.svg', 'public/assets/fonts/svg/arrow.svg');
-
-        // JS
-        this.mkdir('public/assets/js');
 
     // Server
     this.mkdir('server');
