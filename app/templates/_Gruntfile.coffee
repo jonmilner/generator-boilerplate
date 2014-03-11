@@ -80,6 +80,11 @@ module.exports = (grunt) ->
       options:
         assetsDirs: ["public"]
 
+    # Clean
+    clean: [
+      ".tmp"
+    ]
+
     # Image Optimization
     imagemin:
       dynamic:
