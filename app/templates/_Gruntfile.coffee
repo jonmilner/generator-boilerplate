@@ -141,6 +141,7 @@ module.exports = (grunt) ->
           "concat"
           "uglify"
           "usemin"
+          "clean"
         ]
       images:
         files: ["public/assets/images/*"]
@@ -160,6 +161,7 @@ module.exports = (grunt) ->
     "concat"
     "uglify"
     "usemin"
+    "clean"
     "imagemin"
   ]
 
