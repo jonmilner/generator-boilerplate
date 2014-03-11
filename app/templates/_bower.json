@@ -2,5 +2,7 @@
   "name": "<%= _.slugify(projectName) %>",
   "version": "<%= (projectVersion) %>",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "normalize-css": "~3.0.0"
+  }
 }
