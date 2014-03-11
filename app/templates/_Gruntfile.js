@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
-
+  <% if (optionWebfont) { %>
     'webfont': {
       icons: {
         src: 'public/assets/fonts/svg/*.svg', // Path to .svg icons
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         }
       }
     },
-
+    <% } %>
     'compass': {
       dist: {
         options: {
@@ -106,11 +106,11 @@ module.exports = function(grunt) {
       }
     },
 
-    'watch': {
+    'watch': {<% if (optionWebfont) { %>
       fonts: {
         files: ['public/assets/fonts/svg/*.svg'],
         tasks: ['webfont', 'compass', 'autoprefixer', 'cssmin']
-      },
+      },<% } %>
       css: {
         files: ['public/assets/css/**/*.scss'],
         tasks: ['compass', 'autoprefixer', 'cssmin']
@@ -130,18 +130,7 @@ module.exports = function(grunt) {
 
   });
 
-  grunt.registerTask('compile', [
-    'webfont',
-    'compass',
-    'autoprefixer',
-    'cssmin',
-    'bowerInstall',
-    'useminPrepare',
-    'concat',
-    'uglify',
-    'imagemin'
-  ]);
-
+  grunt.registerTask('compile', [<% if (optionWebfont) { %>'webfont', <% } %>'compass', 'autoprefixer', 'cssmin', 'bowerInstall', 'useminPrepare', 'concat', 'uglify', 'imagemin']);
   grunt.registerTask('default', ['compile', 'concurrent']);
   grunt.registerTask('server', ['nodemon:dev']);
 

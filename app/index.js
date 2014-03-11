@@ -29,12 +29,19 @@ var DefaultGenerator = yeoman.generators.Base.extend({
         name: 'projectVersion',
         message: 'Version:',
         default: '0.0.1'
-      }
+      },
+      {
+        type: 'confirm',
+        name: 'optionWebfont',
+        message: 'Use grunt-webfont for custom font icons?',
+        default: true
+      },
     ];
 
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName;
       this.projectVersion = props.projectVersion;
+      this.optionWebfont = props.optionWebfont;
 
       done();
     }.bind(this));
