@@ -41,7 +41,7 @@ Options
 Grunt Tasks
 ----
 
-* [sapegin/**grunt-webfont**] - SVG to webfont converter for Grunt
+* [sapegin/**grunt-webfont**](https://github.com/sapegin/grunt-webfont) - SVG to webfont converter for Grunt
 * [gruntjs/**grunt-contrib-compass**] - Compile Compass to CSS
 * [nDmitry/**grunt-autoprefixer**] - Parse CSS and add vendor-prefixed CSS properties using the Can I Use database. Based on Autoprefixer.
 * [gruntjs/**grunt-contrib-cssmin**] - Compress CSS files
