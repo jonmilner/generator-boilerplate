@@ -23,11 +23,11 @@ var DefaultGenerator = yeoman.generators.Base.extend({
     var prompts = [
       {
         name: 'projectName',
-        message: 'Name:'
+        message: 'Project Name:'
       },
       {
         name: 'projectVersion',
-        message: 'Version:',
+        message: 'Project Version:',
         default: '0.0.1'
       },
       {
