@@ -2,13 +2,12 @@ module.exports = (grunt) ->
   require("load-grunt-tasks") grunt
   grunt.initConfig
 
-    <% if (optionWebfont) { %>
     # Custom Icon Fonts
     webfont:
       icons:
-        src: "app/assets/fonts/svg/*.svg" # Path to .svg icons
+        src: "public/assets/fonts/svg/*.svg" # Path to .svg icons
         dest: "public/assets/fonts/icon-font/" # Destination for font files
-        destCss: "app/assets/css/generated/" # Destination for .scss file
+        destCss: "public/assets/css/generated/" # Destination for .scss file
         options:
           stylesheet: "scss"
           syntax: "bootstrap"
@@ -18,14 +17,13 @@ module.exports = (grunt) ->
           templateOptions:
             classPrefix: "icon-"
           htmlDemo: false
-    <% } %>
 
     # Compass
     compass:
       dist:
         options:
-          sassDir: "app/assets/css"
-          cssDir: "app/assets/css"
+          sassDir: "public/assets/css"
+          cssDir: "public/assets/css"
           outputStyle: "nested"
           noLineComments: true
 
@@ -34,14 +32,14 @@ module.exports = (grunt) ->
       options:
         browsers: "last 2 versions"
       single_file:
-        src: "app/assets/css/styles.css"
-        dest: "app/assets/css/styles.css"
+        src: "public/assets/css/styles.css"
+        dest: "public/assets/css/styles.css"
 
     # Minify CSS
     cssmin:
       minify:
         expand: true
-        cwd: "app/assets/css/"
+        cwd: "public/assets/css/"
         src: "styles.css"
         dest: "public/assets/css/"
         ext: ".css"
@@ -49,41 +47,21 @@ module.exports = (grunt) ->
     # Add Bower Components to HTML
     bowerInstall:
       target:
-        src: ["app/**/*.html"]
+        src: ["public/**/*.html"]
 
-    # Concat + Minify Scripts
-    useminPrepare:
-      html: "app/index.html"
-      options:
-        dest: "public"
-        flow:
-          steps:
-            js: [
-              "concat"
-              "uglifyjs"
-            ]
-          post: {}
-
-    # Copy HTML File
-    copy:
+    # Concat JS
+    concat:
       dist:
-        files: [
-          expand: true
-          cwd: "app"
-          dest: "public"
-          src: ["*.html"]
+        src: [
+          "public/assets/js/scripts/*.js"
         ]
+        dest: "public/assets/js/scripts.min.js"
 
-    # Replace Usemin Block
-    usemin:
-      html: ["public/{,*/}*.html"]
-      options:
-        assetsDirs: ["public"]
-
-    # Clean
-    clean: [
-      ".tmp"
-    ]
+    # Uglify JS
+    uglify:
+      build:
+        src: "public/assets/js/scripts.min.js"
+        dest: "public/assets/js/scripts.min.js"
 
     # Image Optimization
     imagemin:
@@ -116,32 +94,21 @@ module.exports = (grunt) ->
 
     # Watch
     watch:
-      <% if (optionWebfont) { %>
       fonts:
-        files: ["app/assets/fonts/svg/*.svg"]
+        files: ["public/assets/fonts/svg/*.svg"]
         tasks: [
           "webfont"
-          "compass"
-          "autoprefixer"
-          "cssmin"
+          "compile-css"
         ]
-      <% } %>
       css:
-        files: ["app/assets/css/**/*.scss"]
+        files: ["public/assets/css/**/*.scss"]
         tasks: [
-          "compass"
-          "autoprefixer"
-          "cssmin"
+          "compile-css"
         ]
       js:
-        files: ["app/assets/js/scripts/*.js"]
+        files: ["public/assets/js/scripts/*.js"]
         tasks: [
-          "useminPrepare"
-          "copy"
-          "concat"
-          "uglify"
-          "usemin"
-          "clean"
+          "compile-js"
         ]
       images:
         files: ["public/assets/images/*"]
@@ -149,19 +116,25 @@ module.exports = (grunt) ->
       options:
         livereload: true
 
-  # Compile
-  grunt.registerTask "compile", [
-    <% if (optionWebfont) { %>"webfont"<% } %>
+  # Compile CSS
+  grunt.registerTask "compile-css", [
     "compass"
     "autoprefixer"
     "cssmin"
+  ]
+
+  # Compile JS
+  grunt.registerTask "compile-js", [
     "bowerInstall"
-    "useminPrepare"
-    "copy"
     "concat"
     "uglify"
-    "usemin"
-    "clean"
+  ]
+
+  # Compile
+  grunt.registerTask "compile", [
+    "webfont"
+    "compile-css"
+    "compile-js"
     "imagemin"
   ]
 

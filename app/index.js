@@ -1,8 +1,5 @@
 'use strict';
-var util = require('util');
-var path = require('path');
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
 
 var DefaultGenerator = yeoman.generators.Base.extend({
   init: function () {
@@ -10,9 +7,14 @@ var DefaultGenerator = yeoman.generators.Base.extend({
 
     this.on('end', function () {
       if (!this.options['skip-install']) {
-        this.installDependencies();
+        this.installDependencies({
+          callback: function () {
+            this.spawnCommand('grunt', ['default']);
+          }.bind(this) // bind the callback to the parent scope
+        });
       }
     });
+
   },
 
   askFor: function () {
@@ -29,13 +31,7 @@ var DefaultGenerator = yeoman.generators.Base.extend({
         name: 'projectVersion',
         message: 'Project Version:',
         default: '0.0.1'
-      },
-      {
-        type: 'confirm',
-        name: 'optionWebfont',
-        message: 'Use grunt-webfont for custom font icons? (Requires FontForge)',
-        default: true
-      },
+      }
     ];
 
     this.prompt(prompts, function (props) {
@@ -56,31 +52,25 @@ var DefaultGenerator = yeoman.generators.Base.extend({
     this.copy('.gitignore', '.gitignore');
 
     // Front-End
-    this.mkdir('app');
-    this.mkdir('app/components');
-    this.template('app/index.html', 'app/index.html');
-
-      // Assets
-      this.mkdir('app/assets');
-
-        // CSS
-        this.mkdir('app/assets/css');
-        this.template('app/assets/css/styles.scss', 'app/assets/css/styles.scss');
-
-        // Fonts
-        this.mkdir('app/assets/fonts');
-        this.mkdir('app/assets/fonts/svg');
-        this.template('app/assets/fonts/svg/arrow.svg', 'app/assets/fonts/svg/arrow.svg');
-
-        // JS
-        this.mkdir('app/assets/js');
-        this.template('app/assets/js/custom.js', 'app/assets/js/custom.js');
-
-    // Build
     this.mkdir('public');
+    this.mkdir('public/components');
+    this.template('public/index.html', 'public/index.html');
 
       // Assets
       this.mkdir('public/assets');
+
+        // CSS
+        this.mkdir('public/assets/css');
+        this.template('public/assets/css/styles.scss', 'public/assets/css/styles.scss');
+
+        // Fonts
+        this.mkdir('public/assets/fonts');
+        this.mkdir('public/assets/fonts/svg');
+        this.template('public/assets/fonts/svg/arrow.svg', 'public/assets/fonts/svg/arrow.svg');
+
+        // JS
+        this.mkdir('public/assets/js');
+        this.mkdir('public/assets/js/scripts');
 
         // Images
         this.mkdir('public/assets/img');
