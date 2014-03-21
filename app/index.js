@@ -9,7 +9,7 @@ var DefaultGenerator = yeoman.generators.Base.extend({
       if (!this.options['skip-install']) {
         this.installDependencies({
           callback: function () {
-            this.spawnCommand('grunt', ['default']);
+            this.spawnCommand('gulp', ['default']);
           }.bind(this) // bind the callback to the parent scope
         });
       }
@@ -45,8 +45,9 @@ var DefaultGenerator = yeoman.generators.Base.extend({
 
   app: function () {
 
-    this.template('_Gruntfile.coffee', 'Gruntfile.coffee');
     this.copy('_package.json', 'package.json');
+    this.copy('_gulpfile.js', 'gulpfile.js');
+    this.copy('_gruntfile.js', 'gruntfile.js');
     this.copy('_bower.json', 'bower.json');
     this.copy('.bowerrc', '.bowerrc');
     this.copy('.gitignore', '.gitignore');
@@ -54,19 +55,22 @@ var DefaultGenerator = yeoman.generators.Base.extend({
     // Front-End
     this.mkdir('public');
     this.mkdir('public/components');
-    this.template('public/index.html', 'public/index.html');
+
+      // Templates
+      this.mkdir('public/templates');
+      this.copy('public/templates/index.jade', 'public/templates/index.jade');
 
       // Assets
       this.mkdir('public/assets');
 
         // CSS
         this.mkdir('public/assets/css');
-        this.template('public/assets/css/styles.scss', 'public/assets/css/styles.scss');
+        this.copy('public/assets/css/styles.scss', 'public/assets/css/styles.scss');
 
         // Fonts
         this.mkdir('public/assets/fonts');
         this.mkdir('public/assets/fonts/svg');
-        this.template('public/assets/fonts/svg/arrow.svg', 'public/assets/fonts/svg/arrow.svg');
+        this.copy('public/assets/fonts/svg/arrow.svg', 'public/assets/fonts/svg/arrow.svg');
 
         // JS
         this.mkdir('public/assets/js');
@@ -77,7 +81,7 @@ var DefaultGenerator = yeoman.generators.Base.extend({
 
     // Server
     this.mkdir('server');
-    this.template('server/app.js', 'server/app.js');
+    this.copy('server/app.js', 'server/app.js');
 
   }
 });

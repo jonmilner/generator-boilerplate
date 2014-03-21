@@ -4,18 +4,17 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-watch": "~0.5.3",
     "load-grunt-tasks": "~0.2.0",
     "grunt-webfont": "~0.3.0",
-    "grunt-contrib-compass": "~0.7.0",
-    "grunt-autoprefixer": "~0.6.4",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-bower-install": "~1.0.2",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-imagemin": "~0.4.0",
-    "grunt-nodemon": "~0.1.2",
-    "grunt-concurrent": "~0.4.3",
-    "express": "~3.4.8"
+    "gulp": "~3.5.6",
+    "gulp-jade": "~0.4.2",
+    "gulp-compass": "~1.1.6",
+    "gulp-autoprefixer": "0.0.6",
+    "gulp-cssmin": "~0.1.4",
+    "gulp-usemin": "~0.3.3",
+    "gulp-concat": "~2.2.0",
+    "gulp-uglify": "~0.2.1",
+    "gulp-imagemin": "~0.1.5",
+    "gulp-grunt": "~0.4.1"
   }
 }
