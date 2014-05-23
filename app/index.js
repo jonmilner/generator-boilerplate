@@ -47,41 +47,35 @@ var DefaultGenerator = yeoman.generators.Base.extend({
 
     this.copy('_package.json', 'package.json');
     this.copy('_gulpfile.js', 'gulpfile.js');
-    this.copy('_gruntfile.js', 'gruntfile.js');
     this.copy('_bower.json', 'bower.json');
     this.copy('.bowerrc', '.bowerrc');
     this.copy('.gitignore', '.gitignore');
 
     // Front-End
-    this.mkdir('public');
-    this.mkdir('public/components');
+    this.mkdir('app');
 
-      // Templates
-      this.mkdir('public/templates');
-      this.copy('public/templates/index.jade', 'public/templates/index.jade');
+    this.mkdir('app/vendor');
+    this.copy('app/index.jade', 'app/index.jade');
 
       // Assets
-      this.mkdir('public/assets');
+      this.mkdir('app/assets');
 
         // CSS
-        this.mkdir('public/assets/css');
-        this.copy('public/assets/css/styles.scss', 'public/assets/css/styles.scss');
+        this.mkdir('app/assets/css');
+        this.copy('app/assets/css/styles.scss', 'app/assets/css/styles.scss');
 
         // Fonts
-        this.mkdir('public/assets/fonts');
-        this.mkdir('public/assets/fonts/svg');
-        this.copy('public/assets/fonts/svg/arrow.svg', 'public/assets/fonts/svg/arrow.svg');
+        this.mkdir('app/assets/fonts');
+        this.mkdir('app/assets/fonts/svg');
+        this.copy('app/assets/fonts/svg/arrow.svg', 'app/assets/fonts/svg/arrow.svg');
+        this.copy('app/assets/fonts/_icon-font.scss', 'app/assets/fonts/_icon-font.scss');
 
         // JS
-        this.mkdir('public/assets/js');
-        this.mkdir('public/assets/js/scripts');
+        this.mkdir('app/assets/js');
+        this.copy('app/assets/js/scripts.js', 'app/assets/js/scripts.js');
 
         // Images
-        this.mkdir('public/assets/img');
-
-    // Server
-    this.mkdir('server');
-    this.copy('server/app.js', 'server/app.js');
+        this.mkdir('app/assets/img');
 
   }
 });
