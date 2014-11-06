@@ -10,5 +10,7 @@
     "email": "",
     "url": "https://github.com/jonmilner"
   },
-  "dependencies": {}
+  "dependencies": {
+    "yeoman-generator": "~0.17.7"
+  }
 }
