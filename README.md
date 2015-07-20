@@ -9,9 +9,14 @@ Install `yo` and `bower`:
 npm install -g yo bower
 ```
 
-Clone and link the generator:
+Clone & `cd` into the generator:
 ```sh
-git clone https://github.com/jonmilner/generator-boilerplate.git && cd generator-boilerplate && npm install && npm link
+git clone https://github.com/jonmilner/generator-boilerplate.git && cd generator-boilerplate
+```
+
+Install and link the package:
+```sh
+npm install && npm link
 ```
 
 Usage
