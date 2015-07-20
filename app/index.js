@@ -28,16 +28,26 @@ var DefaultGenerator = yeoman.generators.Base.extend({
         message: 'Project Name:'
       },
       {
+        name: 'projectDescription',
+        message: 'Project Description:'
+      },
+      {
         name: 'projectVersion',
         message: 'Project Version:',
         default: '0.0.1'
+      },
+      {
+        name: 'projectLicense',
+        message: 'Project License:',
+        default: 'MIT'
       }
     ];
 
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName;
+      this.projectDescription = props.projectDescription;
       this.projectVersion = props.projectVersion;
-      this.optionWebfont = props.optionWebfont;
+      this.projectLicense = props.projectLicense;
 
       done();
     }.bind(this));
@@ -45,6 +55,7 @@ var DefaultGenerator = yeoman.generators.Base.extend({
 
   app: function () {
 
+    this.copy('_README.md', 'README.md');
     this.copy('_package.json', 'package.json');
     this.copy('_gulpfile.js', 'gulpfile.js');
     this.copy('_bower.json', 'bower.json');
