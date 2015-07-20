@@ -109,12 +109,14 @@ gulp.task('watch', ['compile'], function() {
 // Server
 // =======================================================
 
-gulp.task('connect', function() {
+gulp.task('connect', ['compile'], function() {
   plugin.connect.server({
     root: 'dist',
     port: '8000',
     livereload: true
   });
+  return gulp.src(__filename)
+    .pipe(plugin.open({uri: 'http://localhost:8000'}));
 });
 
 
