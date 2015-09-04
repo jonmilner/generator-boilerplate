@@ -18,6 +18,7 @@ Install and link the package:
 ```sh
 npm install && npm link
 ```
+*Note:* You may need to use `sudo npm link`.
 
 Usage
 ---
